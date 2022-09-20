@@ -1,0 +1,29 @@
+.headerLogo {
+    color: azure;
+}
+
+.web_container {
+    max-width: 1350px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.header-social {
+    padding-left: 38px;
+    justify-content: center;
+}
+
+.header-social a {
+    margin: 0 5px !important;
+    display: inline-block;
+}
+
+.header-social a img {
+    width: 35px;
+}
+
+@media (max-width: 768px) {
+    .headerLogo {
+        max-width: 115px;
+    }
+}
