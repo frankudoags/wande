@@ -4,6 +4,7 @@ import About from 'components/About';
 import Artist from 'components/Artist';
 import Roadmap from 'components/RoadMap';
 import Faq from 'components/Faq';
+import Staking from 'components/Staking'
 import { useEffect } from 'react';
 //
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <About />
       <Roadmap />
       <Artist />
+      <Staking />
       <Faq />
     </main>
   );
