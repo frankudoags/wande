@@ -3,6 +3,11 @@
 
 }
 
+.staking--page {
+    width: 100vw;
+    height: 100vh;
+}
+
 .staking--nav {
     display: flex;
     justify-content: space-between;
@@ -36,4 +41,14 @@
     color: white;
     cursor: pointer;
 
+}
+
+.staking--btn {
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 20px;
+    margin: 10px 0px;
+    cursor: pointer;
 }

@@ -22,6 +22,8 @@ const Staking = () => {
   const { ethereum } = window;
 
 
+
+
   const stakingContract = () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
@@ -30,6 +32,27 @@ const Staking = () => {
     return staking;
   };
 
+  const userBalance = async () => {
+
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const nftContract = new ethers.Contract(nftContractAddress, nftAbi.abi, signer);
+
+    try {
+      
+      const result = await nftContract.balanceOf(account)
+
+      const bal = result.toNumber()
+      setBalance(bal)
+      getUserNft()
+      userStakedNfts()
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
   const userStakedNfts = async () => {
     const contract = stakingContract()
 
@@ -37,7 +60,7 @@ const Staking = () => {
       const result = await contract.userStakeInfo(account)
       const [_tokenStaked, _availableRewards] = result
       const tokensStaked = _tokenStaked.toNumber()
-      const availableRewards = _availableRewards
+      const availableRewards = _availableRewards.toNumber()
       setTokenStaked(tokensStaked)
       setAvailableRewards(availableRewards)
 
@@ -57,25 +80,6 @@ const Staking = () => {
     setUserNfts(userNft)
   }
 
-  const userBalance = async () => {
-
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
-    console.log(nftContractAddress)
-    const nftContract = new ethers.Contract(nftContractAddress, nftAbi.abi, signer);
-
-    try {
-      console.log(account)
-      const result = await nftContract.balanceOf(account)
-
-      const bal = result.toNumber()
-      setBalance(bal)
-
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
 
   const getApproval = async (tokenId) => {
     const provider = new ethers.providers.Web3Provider(ethereum);
@@ -138,39 +142,40 @@ const Staking = () => {
 
   useEffect(() => {
     userBalance()
-    getUserNft()
-    userStakedNfts()
+
+
   }, [account])
 
   return (
     <section className="faq sections" id="faq">
       <div className="container">
         <Slide bottom>
-          <h2>STAKING</h2>
+          <h2>STAKING </h2>
 
         </Slide>
-        <Slide bottom cascade>
-          <nav className="staking--nav">
-            <ul className="staking-list">
-              <li className="staking-listitems">
-                <div>Total NFTs</div>
-                {balance}
-              </li>
-              <li className="staking-listitems">
-                <div>Staked NFTs</div>
-                {tokenStaked}
-              </li>
+        {balance ? <Slide bottom cascade>
+          <div className="staking--page">
+            <nav className="staking--nav">
+              <ul className="staking-list">
+                <li className="staking-listitems">
+                  <div>Total NFTs</div>
+                  {balance}
+                </li>
+                <li className="staking-listitems">
+                  <div>Staked NFTs</div>
+                  {tokenStaked}
+                </li>
 
-              <li className="staking-listitems">
-                Available for claim
-                {availableRewards}
-              </li >
+                <li className="staking-listitems">
+                  <div>Available for claim</div>
+                  {availableRewards}
+                </li >
 
-              <button onClick={() => getReward()} >Claim</button>
+                <button className="staking--btn" onClick={() => getReward()} >Claim</button>
 
-            </ul>
-          </nav>
-
+              </ul>
+            </nav>
+          </div>
           <div className="row">
             {
               userNfts?.map((nft) => {
@@ -190,7 +195,13 @@ const Staking = () => {
               })
             }
           </div>
-        </Slide>
+        </Slide> :
+          <div className="staking--page">
+            <div className="staking--nav">
+
+              <p> OOPS!! You Need A Legendary Owl To Stake.</p>
+            </div>
+          </div>}
       </div>
     </section>
   );

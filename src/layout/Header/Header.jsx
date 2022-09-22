@@ -168,6 +168,18 @@ const Header = () => {
               <span className={`stick ${open ? " open" : ""}`}></span>
             </button>
             <ul className="navbar-nav ms-auto">
+              {/* <li
+                className={activeMenu === "staking" ? "current-menu-item" : ""}
+              >
+                <a
+                  onClick={() => {
+                    setOpen(false);
+                    scrollTo_Section("staking");
+                  }}
+                >
+                  STAKING
+                </a>
+              </li> */}
               <li className={activeMenu === "story" ? "current-menu-item" : ""}>
                 <a
                   onClick={() => {
