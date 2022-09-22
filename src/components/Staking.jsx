@@ -39,7 +39,7 @@ const Staking = () => {
     const nftContract = new ethers.Contract(nftContractAddress, nftAbi.abi, signer);
 
     try {
-      
+
       const result = await nftContract.balanceOf(account)
 
       const bal = result.toNumber()
@@ -147,7 +147,7 @@ const Staking = () => {
   }, [account])
 
   return (
-    <section className="faq sections" id="faq">
+    <section className="faq sections" id="staking">
       <div className="container">
         <Slide bottom>
           <h2>STAKING </h2>
