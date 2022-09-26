@@ -77,6 +77,7 @@ const Staking = () => {
   const getUserNft = async () => {
     const nfts = (await alchemy.nft.getNftsForOwner(account)).ownedNfts
     const userNft = nfts.filter(obj => obj.contract.address === '0x6928d682911c068fbbcaeb1a409b9ab34fabfb91')
+    console.log(userNft)
     setUserNfts(userNft)
   }
 
@@ -163,12 +164,12 @@ const Staking = () => {
                 </li>
                 <li className="staking-listitems">
                   <div>Staked NFTs</div>
-                  {tokenStaked}
+                  {tokenStaked ? { tokenStaked } : "0"}
                 </li>
 
                 <li className="staking-listitems">
                   <div>Available for claim</div>
-                  {availableRewards}
+                  {availableRewards ? { availableRewards } : "0"}
                 </li >
 
                 <button className="staking--btn" onClick={() => getReward()} >Claim</button>
@@ -183,11 +184,11 @@ const Staking = () => {
                   <div className="col-lg-4 col-md-6">
                     <div className="artist-box">
                       <div className="artist-image">
-                        <img loading="lazy" decoding="async" src={nft.media[0].thumbnail} alt="legendary-owl" />
+                        <img loading="lazy" decoding="async" src={`https://ipfs.io/ipfs/${nft.media[0].raw.replace('ipfs://', '')}`} alt="legendary-owl" />
                       </div>
                       <p className="nft-name">{nft.rawMetadata.name}</p>
                       <p>Approve to stake</p>
-                      {approved ? <button onClick={() => stakeNft(nft.tokenId)}>Stake</button> : <button onClick={() => getApproval(nft.tokenId)}>Approve</button>}
+                      {approved ? <button className="staking--btn" onClick={() => stakeNft(nft.tokenId)}>Stake</button> : <button className="staking--btn" onClick={() => getApproval(nft.tokenId)}>Approve</button>}
                     </div>
                   </div>
                 )
