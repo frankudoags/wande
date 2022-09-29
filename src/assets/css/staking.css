@@ -1,22 +1,30 @@
 .nft--name {
     font-size: 5px;
+    padding-top: 30px;
 
 }
+.error-h3 {
+    font-size: 30px;
+    margin: 0 auto;
+}
 
-.staking--page {
-    width: 100vw;
-    height: 100vh;
+.flex {
+    display: flex;
+}
+.gap-2 {
+    gap: 2rem;
+}
+.text-xl {
+    font-size: 1.5rem;
 }
 
 .staking--nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
-    height: 10px;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 30px;
-    padding-top: 20px;
 
     @media(max-width: 64em) {
         .desktop {
@@ -31,10 +39,19 @@
 
 .staking-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     list-style: none;
+    width: 85%;
+
 }
+@media screen and (max-width: 768px) {
+    .staking-list {
+        flex-direction: column;
+    }
+}
+
 
 .staking-listitems {
     margin: 0 1rem;
@@ -42,13 +59,89 @@
     cursor: pointer;
 
 }
+.justify-between {
+    justify-content: space-between;
+}
 
 .staking--btn {
     background-color: white;
     color: black;
     font-size: 20px;
-    padding: 10px 60px;
-    border-radius: 20px;
+    padding: 10px 40px;
+    border-radius: 6px;
     margin: 10px 0px;
     cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.approve-btn {
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    padding: 6px 40px;
+    border-radius: 2px;
+    margin: 10px 0px;
+    cursor: pointer;
+    font-family: harry;
+}
+.harry {
+    font-family: harry;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 3rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+.w-full {
+    width: 100%;
+}
+.staking-card {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    margin: 2rem 0;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.staking-card-image {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    position: relative;
+}
+.staking-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+}
+
+.flex-parent {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.items-center {
+    align-items: center;
 }

@@ -4,6 +4,7 @@ import Footer from "layout/Footer/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "assets/css/style.css";
+import "./index.css";
 import mainLogo from "assets/images/others/logo.png";
 import { useEffect } from "react";
 import { MoralisProvider } from "react-moralis"

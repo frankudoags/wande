@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./header.css";
 import openseaImg from "assets/images/others/opensea.png";
-import instaImg from "assets/images/others/insta.png";
+// import instaImg from "assets/images/others/insta.png";
 import twitterImg from "assets/images/others/twitter.png";
 import { useMoralis, useChain } from "react-moralis"
 import Moralis from "moralis";
@@ -15,15 +15,17 @@ const Header = () => {
 
   const { switchNetwork } = useChain();
 
-  useEffect(() => {
-    if (isWeb3Enabled && chainId != "0x1") {
-      switchN()
-    }
-  }, [isWeb3Enabled, enableWeb3, account])
-
   const switchN = async () => {
     await switchNetwork("0x1")// Switch to "0x1" for Mainnet
-  }
+  };
+
+  useEffect(() => {
+    if (isWeb3Enabled && chainId !== "0x1") {
+      switchN()
+    }
+  }, [isWeb3Enabled, enableWeb3, account, chainId])
+
+ 
 
   const headerRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -171,70 +173,70 @@ const Header = () => {
               <li
                 className={activeMenu === "staking" ? "current-menu-item" : ""}
               >
-                <a
+                <div
                   onClick={() => {
                     setOpen(false);
                     scrollTo_Section("staking");
                   }}
                 >
                   STAKING
-                </a>
+                </div>
               </li>
               <li className={activeMenu === "story" ? "current-menu-item" : ""}>
-                <a
+                <div
                   onClick={() => {
                     setOpen(false);
                     scrollTo_Section("story");
                   }}
                 >
                   OUR STORY
-                </a>
+                </div>
               </li>
               <li
                 className={activeMenu === "roadmap" ? "current-menu-item" : ""}
               >
-                <a
+                <div
                   onClick={() => {
                     setOpen(false);
                     scrollTo_Section("roadmap");
                   }}
                 >
                   ROADMAP
-                </a>
+                </div>
               </li>
               <li
                 className={activeMenu === "artist" ? "current-menu-item" : ""}
               >
-                <a
+                <div
                   onClick={() => {
                     setOpen(false);
                     scrollTo_Section("artist");
                   }}
                 >
                   TEAM
-                </a>
+                </div>
               </li>
               <li className={activeMenu === "faq" ? "current-menu-item" : ""}>
-                <a
+                <div
                   onClick={() => {
                     setOpen(false);
                     scrollTo_Section("faq");
                   }}
                 >
                   FAQS
-                </a>
+                </div>
               </li>
             </ul>
             {/* mint button */}
             <button onClick={() => connect()} className="cs_btn mint_btn">{isWeb3Enabled ? `${account.slice(0, 8)}...` : "Connect Wallet"}</button>
             <div className="social-media header-social">
-              <a href="https://opensea.io" target="_blank">
+              <a href="https://opensea.io" target="_blank" rel="noreferrer">
                 <img src={openseaImg} className="img-fluid" alt="" />
               </a>
-              {/* <a href="https://www.instagram.com/legendaryowls/" target="_blank">
+              {/* <a href="https://www.instagram.com/legendaryowls/" target="_blank" rel="noreferrer">
                 <img src={instaImg} className="img-fluid" alt="" />
               </a> */}
-              <a href="https://twitter.com/LegendaryOwls" target="_blank">
+              <a href="https://twitter.com/LegendaryOwls" target="_blank" rel="noreferrer">
                 <img src={twitterImg} className="img-fluid" alt="" />
               </a>
             </div>
