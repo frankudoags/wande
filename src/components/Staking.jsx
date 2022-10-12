@@ -71,7 +71,7 @@ const Staking = () => {
       let tx = await STKContract.stake(cart);
       let receipt = await tx.wait()
 
-      if (receipt) {
+      if (receipt.status === 1) {
 
         toast.success('NFT unstaked successfully!', {
           position: "bottom-center",
@@ -185,17 +185,21 @@ const Staking = () => {
     let approvedToken = []
     approvedToken.push(tokenId);
     try {
-      await STKContract.stake(approvedToken);
+      let tx = await STKContract.stake(approvedToken);
+      let receipt = await tx.wait()
 
-      toast.success('NFT staked successfully!', {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (receipt.status === 1) {
+        toast.success('NFT staked successfully!', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
     }
     catch (error) {
       console.log(error)
@@ -246,16 +250,20 @@ const Staking = () => {
   const getReward = async () => {
 
     try {
-      await STKContract.claimRewards();
-      toast.success('Rewards Claimed successfully!', {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      let tx = await STKContract.claimRewards();
+      let receipt = await tx.wait()
+      if (receipt) {
+        toast.success('Rewards Claimed successfully!', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }
+
     }
     catch (error) {
       console.log(error)
