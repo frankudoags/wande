@@ -14,8 +14,6 @@ import '../assets/css/staking.css'
 
 const Staking = () => {
 
-
-
   const settings = {
     apiKey: "0AhEi7ZgISHTLrreg8I-AxOfdmhLzRhC", // Replace with your Alchemy API Key.
     network: Network.ETH_MAINNET, // Replace with your network.
@@ -51,6 +49,18 @@ const Staking = () => {
   const [cart, setCart] = useState([]);
   //push to cart function
   const pushToCart = (tokenId) => {
+    //check that the token is not already in the cart
+    if (cart.includes(tokenId)) {
+      return toast.error("Token already in cart", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
     setCart([...cart, tokenId])
   }
   //stake all in cart function
@@ -73,7 +83,7 @@ const Staking = () => {
 
       if (receipt.status === 1) {
 
-        toast.success('NFT unstaked successfully!', {
+        toast.success('NFT staked successfully!', {
           position: "bottom-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -85,8 +95,11 @@ const Staking = () => {
 
         getAllUserNft();
       }
+      //clear cart
+      setCart([]);
     } catch (error) {
       console.log(error);
+      toast.error('Something went wrong, try again');
     }
   }
   //set Approval for all NFTs
@@ -95,6 +108,7 @@ const Staking = () => {
       await NFTContract.setApprovalForAll(stakingContractAddress, true);
     } catch (error) {
       console.log(error);
+      toast.error('Something went wrong, try again');
     }
   }
 
@@ -133,7 +147,7 @@ const Staking = () => {
     }
     catch (error) {
       console.log(error)
-
+      toast.error('Something went wrong, try again');
     }
 
   }
@@ -178,6 +192,7 @@ const Staking = () => {
     catch (error) {
       console.log(error);
       setArrOfStakedTokens([]);
+      toast.error('Something went wrong, try again');
     }
   }
   /**Function to stake a single nft, push token id into an array, check if approved, then stake */
